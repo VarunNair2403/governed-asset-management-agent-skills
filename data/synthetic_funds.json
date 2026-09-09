@@ -1,0 +1,52 @@
+{
+  "data_notice": "All records in this file are fictional synthetic demonstration data. They are not investment information, market data, or advice.",
+  "funds": [
+    {
+      "fund_id": "SYN-FUND-001",
+      "fund_name": "Northstar Global Equity Fund",
+      "approval_status": "APPROVED_INTERNAL_SYNTHETIC",
+      "as_of_date": "2026-08-01",
+      "market_exposure": "Developed-market large-cap equities, with diversified exposure across the United States, Europe, and Japan.",
+      "allocation": "Technology 24%; healthcare 16%; financials 14%; industrials 12%; consumer discretionary 10%; other sectors 24%.",
+      "risks": "Equity-market volatility, sector concentration, foreign-exchange exposure, and valuation sensitivity.",
+      "liquidity_profile": "Daily dealing structure represented for synthetic demonstration purposes.",
+      "sources": [
+        {
+          "source_id": "SYN-SRC-101",
+          "title": "Synthetic Fund Profile",
+          "approved": true,
+          "as_of_date": "2026-08-01"
+        },
+        {
+          "source_id": "SYN-SRC-102",
+          "title": "Synthetic Risk Summary",
+          "approved": true,
+          "as_of_date": "2026-08-01"
+        }
+      ]
+    },
+    {
+      "fund_id": "SYN-FUND-002",
+      "fund_name": "Summit Private Credit Fund",
+      "approval_status": "APPROVED_INTERNAL_SYNTHETIC",
+      "as_of_date": "2025-01-15",
+      "market_exposure": "Synthetic direct-lending exposure to middle-market corporate borrowers.",
+      "allocation": "Senior secured loans 70%; unitranche loans 20%; cash and equivalents 10%.",
+      "risks": "",
+      "sources": [
+        {
+          "source_id": "SYN-SRC-201",
+          "title": "Synthetic Fund Profile",
+          "approved": true,
+          "as_of_date": "2025-01-15"
+        },
+        {
+          "source_id": "",
+          "title": "Synthetic Risk Summary",
+          "approved": true,
+          "as_of_date": "2025-01-15"
+        }
+      ]
+    }
+  ]
+}
