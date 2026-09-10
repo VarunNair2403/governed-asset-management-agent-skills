@@ -1,5 +1,7 @@
 # Governed Asset Management Agent Skills
 
+[![CI](https://github.com/VarunNair2403/governed-asset-management-agent-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/VarunNair2403/governed-asset-management-agent-skills/actions/workflows/ci.yml)
+
 A compact Python prototype demonstrating how reusable Agent Skills and a
 minimal deterministic agent harness can support safe, internal fund-research
 preparation.
