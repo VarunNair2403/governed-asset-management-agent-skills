@@ -14,7 +14,7 @@ class SkillMetadata:
 
 @dataclass(frozen=True)
 class ValidationFinding:
-    """A deterministic evidence-validation finding."""
+    """A deterministic validation finding."""
 
     severity: str
     code: str
@@ -27,4 +27,16 @@ class EvidenceQualityResult:
 
     fund_name: str
     decision: str
+    findings: list[ValidationFinding]
+
+
+@dataclass(frozen=True)
+class WorkflowResult:
+    """Structured result returned by the governed agent harness."""
+
+    selected_skill: str | None
+    fund_name: str | None
+    workflow_state: str
+    message: str
+    output: str | None
     findings: list[ValidationFinding]

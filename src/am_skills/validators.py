@@ -1,6 +1,7 @@
 from datetime import date
 
 from am_skills.models import ValidationFinding
+from am_skills.router import PROHIBITED_TERMS
 
 
 REQUIRED_EVIDENCE_FIELDS = (
@@ -8,6 +9,20 @@ REQUIRED_EVIDENCE_FIELDS = (
     "allocation",
     "risks",
     "sources",
+)
+
+REQUIRED_DRAFT_SECTIONS = (
+    "## Market Exposure",
+    "## Allocation",
+    "## Key Risks",
+    "## Sources",
+    "## Disclaimer",
+)
+
+REQUIRED_DISCLAIMER = (
+    "Synthetic demonstration data only. This internal research-preparation draft "
+    "is not investment advice, a recommendation, or a solicitation. It must be "
+    "reviewed by an authorized human reviewer before any further use."
 )
 
 MAX_EVIDENCE_AGE_DAYS = 365
@@ -80,6 +95,45 @@ def validate_evidence(fund: dict) -> list[ValidationFinding]:
                     message=(
                         f"Source '{source.get('title', 'unknown')}' is not approved."
                     ),
+                )
+            )
+
+    return findings
+
+
+def validate_research_draft(draft: str) -> list[ValidationFinding]:
+    """Return deterministic findings for a generated internal research draft."""
+
+    findings: list[ValidationFinding] = []
+
+    for section in REQUIRED_DRAFT_SECTIONS:
+        if section not in draft:
+            findings.append(
+                ValidationFinding(
+                    severity="ERROR",
+                    code="MISSING_REQUIRED_SECTION",
+                    message=f"Draft is missing required section: {section}.",
+                )
+            )
+
+    if REQUIRED_DISCLAIMER not in draft:
+        findings.append(
+            ValidationFinding(
+                severity="ERROR",
+                code="MISSING_REQUIRED_DISCLAIMER",
+                message="Draft is missing the required disclaimer.",
+            )
+        )
+
+    normalized_draft = draft.casefold()
+
+    for term in PROHIBITED_TERMS:
+        if term in normalized_draft:
+            findings.append(
+                ValidationFinding(
+                    severity="ERROR",
+                    code="PROHIBITED_RECOMMENDATION_LANGUAGE",
+                    message=f"Prohibited recommendation language detected: '{term}'.",
                 )
             )
 
