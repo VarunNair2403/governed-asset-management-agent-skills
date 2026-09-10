@@ -5,54 +5,93 @@ verification results, and next steps.
 
 ---
 
-## Milestone 01 — Project foundation
+## MVP v0.1 — Complete
 
-**Date:** 2026-09-08  
-**Status:** In progress
+**Date:** 2026-09-09  
+**Status:** Complete
 
 ### Goal
 
-Create a compact, portfolio-ready Python repository for governed
-asset-management Agent Skills.
+Build and ship a compact GitHub portfolio prototype that demonstrates governed
+Agent Skills for an internal asset-management research-preparation workflow.
 
 ### Decisions
 
-- **Repository name:** `governed-asset-management-agent-skills`
-- **MVP scope:** Two skills, a deterministic local harness, synthetic data,
-  deterministic validators, five evaluation cases, tests, and GitHub Actions CI.
-- **Core skills:**
+- **Repository:** `governed-asset-management-agent-skills`
+- **Use case:** Synthetic internal fund-research preparation.
+- **Skills:**
   1. `evidence-quality-check`
   2. `fund-research-draft`
-- **Primary workflow:** A user requests an internal fund research draft; the
-  system retrieves controlled synthetic evidence, validates it, creates a
-  structured internal draft, validates the output, and routes the result to
-  `PENDING_HUMAN_REVIEW`.
-- **Data boundary:** Synthetic data only.
-- **Control principle:** `SKILL.md` guides agent behavior; deterministic Python
+- **Runtime:** Local, deterministic, dependency-light, and offline-capable.
+- **Data:** Fictional synthetic fund evidence only.
+- **Core principle:** `SKILL.md` guides behavior; deterministic Python code
   enforces evidence, content, and workflow controls.
-- **Runtime boundary:** The MVP is offline-capable and does not require an LLM,
-  Azure AI Foundry, a vector database, or a web UI.
-
-### Non-negotiable boundaries
-
-- No investment recommendations or advice.
-- No buy, sell, hold, target-price, overweight, or underweight language.
-- No trade execution, portfolio construction, automatic publishing, client
-  communication, or external distribution.
-- All valid internal research drafts end in `PENDING_HUMAN_REVIEW`.
+- **Human oversight:** Every valid research draft ends in
+  `PENDING_HUMAN_REVIEW`.
 
 ### Implemented
 
-- Repository initialized.
-- Base directory structure created.
-- Python packaging configuration added.
-- Initial README, license, Git ignore rules, and continuity documents added.
+- Repository foundation with a `src/` Python package layout.
+- Two reusable `SKILL.md` definitions with frontmatter metadata.
+- Local skill registry for metadata discovery.
+- `list-skills` CLI command.
+- Local synthetic evidence store with:
+  - Northstar Global Equity Fund: complete approved evidence.
+  - Summit Private Credit Fund: intentionally stale and incomplete evidence.
+- Deterministic evidence checks for:
+  - Package approval.
+  - Required evidence fields.
+  - Source ID presence.
+  - Source approval.
+  - Evidence freshness.
+- Deterministic request router.
+- Governed `fund-research-draft` workflow.
+- Deterministic draft validation for:
+  - Required report sections.
+  - Required disclaimer.
+  - Prohibited recommendation terms.
+- Mandatory `PENDING_HUMAN_REVIEW` state.
+- Five versioned evaluation cases.
+- Nine unit and integration tests.
+- GitHub Actions CI workflow.
+- README architecture diagram and representative examples.
 
 ### Verification
 
-Pending initial file review and Git commit.
+```bash
+python evals/run_evals.py
+```
 
-### Next milestone
+Result:
 
-Create the shared data models, two `SKILL.md` definitions, and a minimal
-metadata-based skill registry.
+```text
+Evaluation summary: 5/5 passed
+```
+
+```bash
+PYTHONPATH=src python -m pytest -q
+```
+
+Result:
+
+```text
+9 passed
+```
+
+### Deliberate boundaries
+
+- No live market, fund, client, or portfolio data.
+- No LLM, Azure AI Foundry integration, vector database, or web interface.
+- No investment recommendations, trade execution, portfolio construction,
+  publishing, or client communication.
+- No production-compliance claim.
+
+### Potential v0.2 improvements
+
+1. Optional Azure AI Foundry drafting adapter behind the existing evidence and
+   output validators.
+2. Structured audit traces.
+3. A compliance/provenance review skill.
+4. LLM-assisted routing with confidence thresholds and deterministic fallback.
+5. Streamlit UI while retaining the CLI.
+6. Docker support and dependency lock file.
